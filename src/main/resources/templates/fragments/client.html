@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="col-sm-3" th:fragment="info">
+    <div class="shopper-info">
+        <p>Informatii client</p>
+        <form method="post" th:object="${client}" th:action="@{/registerClient}">
+            <input type="text" th:field="*{nume}" placeholder="Nume">
+            <input type="text" th:field="*{prenume}" placeholder="Prenume">
+            <input type="text" th:field="*{telefon}" placeholder="Telefon">
+            <input type="submit" class="btn btn-primary" th:value="Salveaza"/>
+        </form>
+    </div>
+</div>
+<div class="col-sm-6 clearfix" th:fragment="adresa_livrare">
+
+    <div class="bill-to">
+        <p>Adresa livrare</p>
+
+        <div class="form-one">
+            <form th:object="${client}" th:action="@{/salveazaAdresaLivrare}"
+                  method="post">
+                <input type="text" th:field="*{adresaLivrare.adresa}" placeholder="Adresa*">
+                <input type="text" th:field="*{adresaLivrare.oras}" placeholder="Oras*">
+                <input type="text" th:field="*{adresaLivrare.judet}" placeholder="Judet*">
+                <input type="text" th:field="*{adresaLivrare.tara}" placeholder="Tara">
+                <label><input type="checkbox"> Foloseste aceasi adresa pentru facturare.</label>
+                <input type="submit" th:value="Salveaza" class="btn btn-primary">
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head">
+</head>
+<body>
+<header th:replace="/fragments/header :: navbar"></header>
+
+<section id="form"><!--form-->
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="signup-form"><!--login form-->
+                    <h2>Adaugare produs nou</h2>
+                    <form th:action="@{/adaugareProdusNou}" th:object="${produs}" method="post">
+                        <!--<div align="center" th:if="${param.error}">-->
+                        <!--<p style="font-size: 20; color: #FF1C19;">Email sau parola gresite!</p>-->
+                        <!--</div>-->
+                        <input type="text" th:field="*{nume}" placeholder="Nume"/>
+                        <textarea rows="12" th:field="*{descriere}" placeholder="Desciere"/>
+                        <input type="number" th:field="*{cantitate}" placeholder="Cantitate"/>
+                        <input type="text" th:field="*{pret}" placeholder="Pret"/>
+                        <select th:field="*{categorie.nume}">
+                            <option th:each="categorie : ${categorii}" th:value="${categorie.nume}"
+                                    th:text="${categorie.nume}"></option>
+                        </select>
+
+                        <input type="text" th:field="*{linkImagine}" placeholder="Link Imagine"/>
+                        <button type="submit" class="btn btn-default">Adauga!</button>
+                    </form>
+                </div><!--/login form-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

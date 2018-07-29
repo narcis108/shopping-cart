@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="/fragments/header :: head"></head>
+<body>
+
+<header th:replace="/fragments/header :: navbar"></header>
+
+<div class="col-sm-9">
+    <div class="product-details"><!--produs-details-->
+        <div class="col-sm-5">
+            <div class="view-product">
+                <img th:if="${produs.linkImagine} != '' "
+                     th:src="${produs.linkImagine}"
+                     alt=""/></img>
+                <img th:if="${produs.linkImagine} == '' "
+                     src="images/home/fabricat-in-ro.jpg"
+                     alt=""/></img>
+                <h3>ZOOM</h3>
+            </div>
+        </div>
+        <div class="col-sm-7">
+            <div class="product-information"><!--/produs-information-->
+                <img src="images/product-details/new.jpg" class="newarrival" alt=""/>
+                <h2 th:text="${produs.nume}"></h2>
+                <p th:text="${produs.descriere}"></p>
+                <p class="last-products" th:if="${produs.cantitate < 5 && produs.cantitate > 1}"
+                   th:text="${'Ultimele ' + produs.cantitate + ' produse!'}"></p>
+                <p th:if="${produs.cantitate == 1}">Ultimul produs din stoc!</p>
+                <p th:if="${produs.cantitate == 0}">Stoc epuizat!</p>
+                <span>
+									<span th:text="${produs.pret + ' Lei'}"></span>
+										<a th:if="${produs.cantitate > 0}" sec:authorize="isAuthenticated()"
+                                           th:href="@{'/shoppingCart/addProduct/{idProdus}'(idProdus=${produs.idProdus})}"
+                                           class="btn btn-default add-to-cart"><i
+                                                class="fa fa-shopping-cart"></i>Adauga in cos</a>
+								</span>
+            </div><!--/produs-information-->
+        </div>
+    </div><!--/produs-details-->
+
+
+</div>
+
+
+</body>
+<!--<footer th:replace="/fragments/footer :: footer"></footer>-->
+</html>

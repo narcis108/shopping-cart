@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head">
+</head><!--/head-->
+<body>
+<header th:replace="/fragments/header :: navbar"></header>
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+
+
+        <div class="shopper-informations">
+            <div class="row">
+                <div th:replace="/fragments/client :: info"/>
+                <div th:replace="/fragments/client :: adresa_livrare"/>
+            </div>
+        </div>
+        <section th:replace="/fragments/cart :: cart_items"></section>
+        <form th:action="@{/adaugaComanda}" method="post">
+            <input class="btn btn-primary" type="submit" value="Finalizeaza comanda"/>
+        </form>
+    </div>
+</section>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

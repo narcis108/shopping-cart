@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head">
+
+</head>
+<body>
+<header th:replace="/fragments/header :: navbar">
+</header>
+
+
+<div class="container">
+    <div class="table-responsive cart_info">
+        <div class="wrapper">
+            <div class="order-table">
+
+                <div class="order-row header orange">
+                    <div class="cell">
+                        Comanda
+                    </div>
+                    <div class="cell">
+                        Pret total
+                    </div>
+                    <div class="cell">
+                        Data comanda
+                    </div>
+                    <div class="cell">
+                        Status
+                    </div>
+                    <div class="cell">
+                        Detalii comanda
+                    </div>
+                </div>
+
+                <div class="order-row" th:each="comanda : ${listaComenzi}">
+                    <div class="cell" data-title="Product" th:text="${comanda.idComanda}"></div>
+                    <div class="cell" data-title="Unit Price" th:text="${comanda.cosCumparaturi.price}"></div>
+                    <div class="cell" data-title="Date Sold"
+                         th:text="${#dates.format(comanda.dataComanda,
+                          'dd-MM-yyyy')}"></div>
+                    <div class="cell" data-title="Status" th:text="${comanda.status}"></div>
+                    <a th:href="@{'/cautaCosDupaIdComanda={id}'(id=${comanda.idComanda})}">
+                        <div class="cell" th:text="Detalii"></div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>

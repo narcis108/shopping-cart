@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+<section th:fragment="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Categorii</h2>
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                        <div class="panel panel-default" th:each="categorie : ${categorii}">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a th:text="${categorie.nume}"
+                                                           th:href="@{'afiseazaProduseDupaCategorie={categorie}'(categorie=${categorie.nume})}"></a>
+                                </h4>
+                            </div>
+                        </div>
+                    </div><!--/category-products-->
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <h2 class="title text-center">Produse</h2>
+                    <th:block>
+                        <div class="col-sm-4" th:each="produs : ${products}">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <a th:if="${produs.linkImagine != ''}"
+                                           th:href="@{'detaliiProdusId={id}'(id=${produs.idProdus})}"><img
+                                                class="imagine-produs"
+                                                th:src="${produs.linkImagine}"
+                                                alt=""/></a>
+                                        <a th:if="${produs.linkImagine == ''}"
+                                           th:href="@{'detaliiProdusId={id}'(id=${produs.idProdus})}"><img
+                                                class="imagine-produs"
+                                                src="images/home/fabricat-in-ro.jpg"
+                                                alt=""/></a>
+                                        <h2 th:text="${produs.pret + ' Lei'}"></h2>
+                                        <p th:text="${produs.nume}"/>
+                                        <a th:if="${produs.cantitate > 0}" sec:authorize="isAuthenticated()"
+                                           th:href="@{'/shoppingCart/addProduct/{idProdus}'(idProdus=${produs.idProdus})}"
+                                           class="btn btn-default add-to-cart"><i
+                                                class="fa fa-shopping-cart"></i>Adauga in cos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+
+                </div><!--features_items-->
+
+            </div><!--/category-tab-->
+        </div>
+    </div>
+    </div>
+</section>
+</body>
+</html>

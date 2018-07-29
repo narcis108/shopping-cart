@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/header :: head"/>
+
+<body>
+
+<div th:replace="/fragments/header :: navbar"/>
+
+<section>
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="signup-form"><!--sign up form-->
+                    <h2>Inregistrare!</h2>
+                    <form th:action="@{/processPassword}" method="post">
+                        <input type="password" placeholder="Parola" name="parola" idProdus="parola" required/>
+                        <input type="hidden" name="token" th:value="${confirmationToken}">
+                        <button type="submit">Salveaza parola!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>

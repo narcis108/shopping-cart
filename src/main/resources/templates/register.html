@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"/>
+
+<body>
+
+<header th:replace="fragments/header :: navbar"/>
+
+<section id="form"><!--form-->
+    <div class="container" align="center">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-5">
+                <div class="signup-form"><!--sign up form-->
+                    <h2>Inregistrare!</h2>
+                    <form th:action="@{/register}" th:object="${utilizator}" method="post">
+                        <input type="email" th:field="*{email}" placeholder="Email" required/>
+                        <button type="submit" class="btn btn-default">Inregistreaza-te!</button>
+                        <a th:if="${link}" class="alert alert-success" role="alert" th:href="${link}">
+                            Apasa aici pentru ati confirma contul!</a>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
+
+<footer th:replace="fragments/footer :: footer"/>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

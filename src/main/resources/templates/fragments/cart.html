@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<section id="cart_items" th:fragment="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image">Item</td>
+                    <td class="descriere"></td>
+                    <td class="price">Pret</td>
+                    <td class="cantitate">Cantitate</td>
+                    <td class="total">Total</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <tr th:each="produs : ${products.entrySet()}">
+                    <td class="cart_product">
+                        <img src="/images/cart/one.png"/>
+                    </td>
+                    <td class="cart_description">
+                        <h4 th:text="${produs.getKey().nume}"></h4>
+                    </td>
+                    <td class="cart_price">
+                        <p th:text="${produs.getKey().pret}"></p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            <a class="cart_quantity_up"
+                               th:disabled="${produs.getKey().cantitate }"
+                               th:href="@{'/shoppingCart/addProduct/{id}'(id=${produs.getKey().idProdus})}"> + </a>
+                            <input class="cart_quantity_input" type="text" nume="cantitate"
+                                   th:value="${produs.getValue()}"
+                                   autocomplete="off"
+                                   size="2" disabled>
+                            <a class="cart_quantity_down"
+                               th:href="@{'/shoppingCart/removeProduct/{id}'(id=${produs.getKey().idProdus})}"> - </a>
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        <p th:text="${produs.getKey().pret * produs.getValue()}" class="cart_total_price"></p>
+                    </td>
+                    <td class="cart_delete">
+                        <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                </td>
+                </tbody>
+            </table>
+        </div>
+</section> <!--/#cart_items-->
+
+</body>
+</html>

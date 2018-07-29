@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="/fragments/header :: head"></head>
+
+<body>
+<header th:replace="/fragments/header :: navbar"></header>
+
+<div class="container">
+    <div class="table-responsive cart_info">
+        <div class="wrapper">
+            <div class="order-table">
+
+                <div class="order-row header orange">
+                    <div class="cell">
+                        Nume produs
+                    </div>
+                    <div class="cell">
+                        Pret unitate
+                    </div>
+                    <div class="cell">
+                        Cantitate
+                    </div>
+                </div>
+
+                <div class="order-row" th:each="item : ${cartItemList}">
+                    <a th:href="@{'/detaliiProdusId={id}'(id=${item.produs.idProdus})}">
+                        <div class="cell" data-title="Unit Price" th:text="${item.produs.nume}"></div>
+                    </a>
+                    <div class="cell" data-title="Date Sold"
+                         th:text="${item.produs.pret}"></div>
+                    <div class="cell" data-title="Status" th:text="${item.cantitate}"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer th:replace="/fragments/footer :: footer"></footer>
+</body>
+</html>
